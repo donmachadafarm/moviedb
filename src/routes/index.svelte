@@ -16,10 +16,11 @@
 <script>
     import PopularMovies from "../components/PopularMovies.svelte"
     import SearchMovies from '../components/SearchMovie.svelte'
+    import {fly} from 'svelte/transition'
     export let popular
 </script>
 
-<section>
+<section in:fly={{y:50, duration:500, delay: 500}} out:fly={{duration:500}}>
     <SearchMovies />
     <PopularMovies {popular}/>
 </section>
