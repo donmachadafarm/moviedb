@@ -15,12 +15,16 @@
 <script>
     export let movieDetail
     import {fly} from 'svelte/transition'
-    console.log(movieDetail)
+    movieDetail?console.log(movieDetail):console.log('nothing yet')
 </script>
 
 <div class="movie-details" in:fly={{y:50, duration:500, delay: 500}} out:fly={{duration:500}}>
     <div class="img-container">
-        <img src="{'https://image.tmdb.org/t/p/original' + movieDetail.backdrop_path}" alt="{movieDetail.title}">
+        {#if movieDetail.backdrop_path}
+            <img src="{'https://image.tmdb.org/t/p/original/' + movieDetail.backdrop_path}" alt="{movieDetail.title}">
+        {:else}
+            <img style="height: 600px; width: 1300px;" src="{'https://image.tmdb.org/t/p/original/' + movieDetail.poster_path}" alt="{movieDetail.title}">
+        {/if}
     </div>
     <div class="text-container">
         <h1>{movieDetail.title}</h1>
